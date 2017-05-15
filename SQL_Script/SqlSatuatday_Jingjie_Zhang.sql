@@ -35,7 +35,7 @@ CREATE TABLE SqlEvent
 	CONSTRAINT PKUnxEventNumber PRIMARY KEY CLUSTERED (eventNumber),
 	CONSTRAINT FKSqlEventVenueNumber FOREIGN KEY (venueNumber) REFERENCES Venue(venueNumber),
 )
-CREATE NONCLUSTERED INDEX UnxSqlEventVenueNumber ON SqlEvent(venueNumber ASC)
+CREATE NONCLUSTERED INDEX IdxSqlEventVenueNumber ON SqlEvent(venueNumber ASC)
 
 CREATE TABLE Organizer
 (
@@ -54,8 +54,8 @@ CREATE TABLE EventHasOrganizer
 	CONSTRAINT FKEventHasOrganizerEventNumber FOREIGN KEY (eventNumber) REFERENCES SqlEvent(eventNumber),
 	CONSTRAINT FKEventHasOrganizerOrganizerNumber FOREIGN KEY (organizerNumber) REFERENCES Organizer(organizerNumber)
 )
-CREATE NONCLUSTERED INDEX UnxEventHasOrganizerEventNumber ON EventHasOrganizer(eventNumber ASC)
-CREATE NONCLUSTERED INDEX UnxEventHasOrganizerOrganizerNumber ON EventHasOrganizer(organizerNumber ASC)
+CREATE NONCLUSTERED INDEX IdxEventHasOrganizerEventNumber ON EventHasOrganizer(eventNumber ASC)
+CREATE NONCLUSTERED INDEX IdxEventHasOrganizerOrganizerNumber ON EventHasOrganizer(organizerNumber ASC)
 
 /* Presentation and session are the same thing here */
 CREATE TABLE Presentation
@@ -104,7 +104,7 @@ CREATE TABLE Presenter
 	CONSTRAINT PKUnxPresenterNumber PRIMARY KEY CLUSTERED(presenterNumber),
 	CONSTRAINT FKPresenterPersonNumber FOREIGN KEY (personNumber) REFERENCES Person(personNumber)
 )
-CREATE NONCLUSTERED INDEX UnxPresenterPersonNumber ON Presenter(personNumber ASC)
+CREATE NONCLUSTERED INDEX IdxPresenterPersonNumber ON Presenter(personNumber ASC)
 
 
 CREATE TABLE Sponsor
@@ -126,8 +126,8 @@ CREATE TABLE OrganizerKeepTrackOfSession
 	CONSTRAINT FKOrganizerKeepTrackOfSessionOrganizerNumber FOREIGN KEY (organizerNumber) REFERENCES Organizer(organizerNumber),
 	CONSTRAINT FKOrganizerKeepTrackOfSessionSessionNumber FOREIGN KEY (sessionNumber) REFERENCES Presentation(sessionNumber)
 )
-CREATE NONCLUSTERED INDEX UnxOrganizerKeepTrackOfSessionOrganizerNumber ON OrganizerKeepTrackOfSession(organizerNumber ASC)
-CREATE NONCLUSTERED INDEX UnxOrganizerKeepTrackOfSessionSessionNumber ON OrganizerKeepTrackOfSession(sessionNumber ASC)
+CREATE NONCLUSTERED INDEX IdxOrganizerKeepTrackOfSessionOrganizerNumber ON OrganizerKeepTrackOfSession(organizerNumber ASC)
+CREATE NONCLUSTERED INDEX IdxOrganizerKeepTrackOfSessionSessionNumber ON OrganizerKeepTrackOfSession(sessionNumber ASC)
 
 
 /* link table */
@@ -139,8 +139,8 @@ CREATE TABLE OrganizerSolicitSponsor
 	CONSTRAINT FKOrganizerSolicitSponsorOrganizerNumber FOREIGN KEY (organizerNumber) REFERENCES Organizer(organizerNumber),
 	CONSTRAINT FKOrganizerSolicitSponsorSponsorNumber FOREIGN KEY (sponsorNumber) REFERENCES Sponsor(sponsorNumber)
 )
-CREATE NONCLUSTERED INDEX UnxOrganizerSolicitSponsorOrganizerNumber ON OrganizerSolicitSponsor(organizerNumber ASC)
-CREATE NONCLUSTERED INDEX UnxOrganizerSolicitSponsorSponsorNumber ON OrganizerSolicitSponsor(sponsorNumber ASC)
+CREATE NONCLUSTERED INDEX IdxOrganizerSolicitSponsorOrganizerNumber ON OrganizerSolicitSponsor(organizerNumber ASC)
+CREATE NONCLUSTERED INDEX IdxOrganizerSolicitSponsorSponsorNumber ON OrganizerSolicitSponsor(sponsorNumber ASC)
 
 
 /* link table */
@@ -152,8 +152,8 @@ CREATE TABLE PresenterPresentSession
 	CONSTRAINT FKPresenterPresentSessionPresenterNumber FOREIGN KEY (presenterNumber) REFERENCES Presenter(presenterNumber),
 	CONSTRAINT FKPresenterPresentSessionSessionNumber FOREIGN KEY (sessionNumber) REFERENCES Presentation(sessionNumber)
 )
-CREATE NONCLUSTERED INDEX UnxPresenterPresentSessionPresenterNumber ON PresenterPresentSession(presenterNumber ASC)
-CREATE NONCLUSTERED INDEX UnxPresenterPresentSessionSessionNumber ON PresenterPresentSession(sessionNumber ASC)
+CREATE NONCLUSTERED INDEX IdxPresenterPresentSessionPresenterNumber ON PresenterPresentSession(presenterNumber ASC)
+CREATE NONCLUSTERED INDEX IdxPresenterPresentSessionSessionNumber ON PresenterPresentSession(sessionNumber ASC)
 
 
 
@@ -166,8 +166,8 @@ CREATE TABLE EventHasSponsor
 	CONSTRAINT FKEventHasSponsorEventNumber FOREIGN KEY (eventNumber) REFERENCES SqlEvent(eventNumber),
 	CONSTRAINT FKEventHasSponsorSponsorNumber FOREIGN KEY (sponsorNumber) REFERENCES Sponsor(sponsorNumber)
 )
-CREATE NONCLUSTERED INDEX UnxEventHasSponsorEventNumber ON EventHasSponsor(eventNumber ASC)
-CREATE NONCLUSTERED INDEX UnxEventHasSponsorSponsorNumber ON EventHasSponsor(sponsorNumber ASC)
+CREATE NONCLUSTERED INDEX IdxEventHasSponsorEventNumber ON EventHasSponsor(eventNumber ASC)
+CREATE NONCLUSTERED INDEX IdxEventHasSponsorSponsorNumber ON EventHasSponsor(sponsorNumber ASC)
 
 
 
@@ -180,7 +180,7 @@ CREATE TABLE Gift
 	CONSTRAINT PKUnxGift PRIMARY KEY CLUSTERED(giftNumber),
 	CONSTRAINT FKGiftSponsorNumber FOREIGN KEY (sponsorNumber) REFERENCES Sponsor(sponsorNumber)
 )
-CREATE NONCLUSTERED INDEX UnxGiftSponsorNumber ON Gift(sponsorNumber ASC)
+CREATE NONCLUSTERED INDEX IdxGiftSponsorNumber ON Gift(sponsorNumber ASC)
 
 
 
@@ -193,8 +193,8 @@ CREATE TABLE Raffle
 	CONSTRAINT FKRaffleEventNumber FOREIGN KEY (eventNumber) REFERENCES SqlEvent(eventNumber),
 	CONSTRAINT FKRaffleGiftNumber FOREIGN KEY (giftNumber) REFERENCES Gift(giftNumber)
 )
-CREATE NONCLUSTERED INDEX UnxRaffleEventNumber ON Raffle(eventNumber ASC)
-CREATE NONCLUSTERED INDEX UnxRaffleGiftNumber ON Raffle(giftNumber ASC)
+CREATE NONCLUSTERED INDEX IdxRaffleEventNumber ON Raffle(eventNumber ASC)
+CREATE NONCLUSTERED INDEX IdxRaffleGiftNumber ON Raffle(giftNumber ASC)
 
 
 
@@ -207,8 +207,8 @@ CREATE TABLE Attendee
 	CONSTRAINT FKAttendeePersonNumber FOREIGN KEY (personNumber) REFERENCES Person(personNumber),
 	CONSTRAINT FKAttendeeEventNumber FOREIGN KEY (eventNumber) REFERENCES SqlEvent(eventNumber)
 )
-CREATE NONCLUSTERED INDEX UnxAttendeePersonNumber ON Attendee(personNumber ASC)
-CREATE NONCLUSTERED INDEX UnxAttendeeEventNumber ON Attendee(eventNumber ASC)
+CREATE NONCLUSTERED INDEX IdxAttendeePersonNumber ON Attendee(personNumber ASC)
+CREATE NONCLUSTERED INDEX IdxAttendeeEventNumber ON Attendee(eventNumber ASC)
 
 
 CREATE TABLE Volunteer
@@ -220,7 +220,7 @@ CREATE TABLE Volunteer
 	CONSTRAINT PKUnxVolunteer PRIMARY KEY CLUSTERED(volunteerNumber),
 	CONSTRAINT FKVolunteerPersonNumber FOREIGN KEY (personNumber) REFERENCES Person(personNumber)
 )
-CREATE NONCLUSTERED INDEX UnxVolunteerPersonNumber ON Volunteer(personNumber ASC)
+CREATE NONCLUSTERED INDEX IdxVolunteerPersonNumber ON Volunteer(personNumber ASC)
 
 
 /* link table */
@@ -232,8 +232,8 @@ CREATE TABLE EventHasVolunteer
 	CONSTRAINT FKEventHasVolunteerEventNumber FOREIGN KEY (eventNumber) REFERENCES SqlEvent(eventNumber),
 	CONSTRAINT FKEventHasVolunteerVolunteerNumber FOREIGN KEY (volunteerNumber) REFERENCES Volunteer(volunteerNumber)
 )
-CREATE NONCLUSTERED INDEX UnxEventHasVolunteerEventNumber ON EventHasVolunteer(eventNumber ASC)
-CREATE NONCLUSTERED INDEX UnxEventHasVolunteerVolunteerNumber ON EventHasVolunteer(volunteerNumber ASC)
+CREATE NONCLUSTERED INDEX IdxEventHasVolunteerEventNumber ON EventHasVolunteer(eventNumber ASC)
+CREATE NONCLUSTERED INDEX IdxEventHasVolunteerVolunteerNumber ON EventHasVolunteer(volunteerNumber ASC)
 
 
 
@@ -246,7 +246,7 @@ CREATE TABLE Room
 	CONSTRAINT PKUnxRoom PRIMARY KEY CLUSTERED(roomNumber),
 	CONSTRAINT FKRoomVenueNumber FOREIGN KEY (venueNumber) REFERENCES Venue(venueNumber)
 )
-CREATE NONCLUSTERED INDEX UnxRoomVenueNumber ON Room(venueNumber ASC)
+CREATE NONCLUSTERED INDEX IdxRoomVenueNumber ON Room(venueNumber ASC)
 
 
 
@@ -266,8 +266,8 @@ CREATE TABLE TrackOfPresentation
 	CONSTRAINT FKTrackOfPresentationTrackNumber FOREIGN KEY (trackNumber) REFERENCES Track(trackNumber),
 	CONSTRAINT FKTrackOfPresentationSessionNumber FOREIGN KEY (sessionNumber) REFERENCES Presentation(sessionNumber)
 )
-CREATE NONCLUSTERED INDEX UnxTrackOfPresentationTrackNumber ON TrackOfPresentation(trackNumber ASC)
-CREATE NONCLUSTERED INDEX UnxTrackOfPresentationSessionNumber ON TrackOfPresentation(sessionNumber ASC)
+CREATE NONCLUSTERED INDEX IdxTrackOfPresentationTrackNumber ON TrackOfPresentation(trackNumber ASC)
+CREATE NONCLUSTERED INDEX IdxTrackOfPresentationSessionNumber ON TrackOfPresentation(sessionNumber ASC)
 
 
 /* link table */
@@ -283,9 +283,9 @@ CREATE TABLE ScheduleOfClass
 	CONSTRAINT FKScheduleOfClassRoomNumber FOREIGN KEY (roomNumber) REFERENCES Room(roomNumber),
 	CONSTRAINT FKScheduleOfClassSessionNumber FOREIGN KEY (sessionNumber) REFERENCES Presentation(sessionNumber)
 )
-CREATE NONCLUSTERED INDEX UnxScheduleOfClassEventNumber ON ScheduleOfClass(eventNumber ASC)
-CREATE NONCLUSTERED INDEX UnxScheduleOfClassRoomNumber ON ScheduleOfClass(roomNumber ASC)
-CREATE NONCLUSTERED INDEX UnxScheduleOfClassSessionNumber ON ScheduleOfClass(sessionNumber ASC)
+CREATE NONCLUSTERED INDEX IdxScheduleOfClassEventNumber ON ScheduleOfClass(eventNumber ASC)
+CREATE NONCLUSTERED INDEX IdxScheduleOfClassRoomNumber ON ScheduleOfClass(roomNumber ASC)
+CREATE NONCLUSTERED INDEX IdxScheduleOfClassSessionNumber ON ScheduleOfClass(sessionNumber ASC)
 
 
 /*
